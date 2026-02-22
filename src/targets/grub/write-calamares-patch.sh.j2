@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -xe
+
+# Write patch
+CALAMARES_GRUB_PATCH_PATH={{ calamares_grub_patch_path }}
+cat > "$CALAMARES_GRUB_PATCH_PATH" << EOL
+{{ calamares_grub_patch_content }}
+EOL
+
+chmod 755 $CALAMARES_GRUB_PATCH_PATH

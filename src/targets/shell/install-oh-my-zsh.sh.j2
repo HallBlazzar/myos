@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -xe
+
+sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)" "" --unattended
+
+# plugins
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+# mv /root/.oh-my-zsh /etc/skel/.oh-my-zsh
+mv /root/.oh-my-zsh {{ oh_my_zsh_installation_path }}
+
+# change default shell when create user
+# for adduser
+sed -i 's/#DSHELL=.*$/DSHELL=\/bin\/zsh/g' /etc/adduser.conf
+# for useradd
+sed -i 's/SHELL=.*$/SHELL=\/bin\/zsh/g' /etc/default/useradd

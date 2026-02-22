@@ -1,0 +1,9 @@
+#!/bin/bash
+
+CALAMARES_DEFAULT_SHELL_PATCH_PATH={{ calamares_default_shell_patch_path }}
+
+cat > "$CALAMARES_DEFAULT_SHELL_PATCH_PATH" << EOL
+{{ calamares_default_shell_patch_content }}
+EOL
+
+chmod 755 $CALAMARES_DEFAULT_SHELL_PATCH_PATH

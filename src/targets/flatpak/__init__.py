@@ -1,0 +1,1 @@
+from .flatpak import targets

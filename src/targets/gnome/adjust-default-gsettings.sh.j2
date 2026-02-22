@@ -1,0 +1,77 @@
+#!/bin/bash
+
+set -xe
+
+PRELOAD_DCONF_DIR_PATH={{ dconf_dir_path }}
+PRELOAD_DCONF_PATH={{ dconf_path }}
+PRELOAD_DCONF_PROFILE_PATH={{ dconf_profile_path }}
+
+mkdir -p $PRELOAD_DCONF_DIR_PATH
+
+cat > $PRELOAD_DCONF_PATH <<EOL
+[org/gnome/shell]
+#enabled-extensions=['dash-to-dock@micxgx.gmail.com','appindicatorsupport@rgcjonas.gmail.com','kimpanel@kde.org','hibernate-status@dromi','just-perfection-desktop@just-perfection','Vitals@CoreCoding.com','lockkeys@vaina.lt']
+enabled-extensions=['appindicatorsupport@rgcjonas.gmail.com', 'kimpanel@kde.org', 'hibernate-status@dromi', 'Vitals@CoreCoding.com', 'lockkeys@vaina.lt', 'status-icons@gnome-shell-extensions.gcampax.github.com', 'ubuntu-appindicators@ubuntu.com', 'dash-to-dock@micxgx.gmail.com', 'Move_Clock@rmy.pobox.com', 'no-overview@fthx']
+
+[org/gnome/shell/extensions/dash-to-dock]
+disable-overview-on-startup=true
+dock-fixed=true
+multi-monitor=true
+dock-position='LEFT'
+extend-height=true
+custom-theme-shrink=true
+click-action='minimize'
+isolate-workspaces=true
+
+# giving minimize/maximize/close button to windows
+[org/gnome/desktop/wm/preferences]
+button-layout='appmenu:minimize,maximize,close'
+
+# favorite desktop apps
+[org/gnome/shell]
+favorite-apps=['firefox-esr.desktop', 'pcmanfm.desktop']
+
+# battery icon display setting
+[org/gnome/desktop/interface]
+show-battery-percentage=true
+
+# GTK3 applications' theme (e.g. PCMan File Manager)
+[org/gnome/desktop/interface]
+color-scheme='prefer-dark'
+gtk-theme='Adwaita-dark'
+enable-hot-corners=false
+
+# battery
+[org/gnome/settings-daemon/plugins/power]
+power-saver-profile-on-low-battery=false
+sleep-inactive-ac-type='nothing'
+sleep-inactive-battery-type='nothing'
+
+[org/gnome/shell]
+last-selected-power-profile='performance'
+
+[org/gnome/desktop/screensaver]
+lock-enabled=false
+
+# Set default switch input source shortcut to somewhere not easily to be triggered
+# This allows us to use different input methods
+[org/gnome/desktop/wm/keybindings]
+switch-input-source=['<Shift><Super>slash']
+
+[org/gnome/Ptyxis]
+use-system-font=false
+font-name='FiraCode Nerd Font 10'
+default-profile-uuid='3efe69c2604ae155dccddfb2695469ee'
+profile-uuids=['3efe69c2604ae155dccddfb2695469ee']
+
+[org/gnome/Ptyxis/Profiles/3efe69c2604ae155dccddfb2695469ee]
+palette='Vs Code'
+EOL
+
+cat > $PRELOAD_DCONF_PROFILE_PATH <<EOL
+user-db:user
+system-db:local
+EOL
+
+# update database
+dconf update

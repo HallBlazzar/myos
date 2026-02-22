@@ -1,0 +1,35 @@
+#!/bin/bash
+
+set -e
+set -x
+set -o pipefail
+
+TOOLBOX_SAVE_PATH={{ toolbox_tarball_save_path }}
+ARCHIVE_URL={{ toolbox_tarball_download_url }}
+
+TOOLBOX_INSTALL_DIR={{ toolbox_install_dir_path }}
+TOOLBOX_EXECUTABLE_RELATIVE_PATH={{ toolbox_executable_relative_path }}
+TOOLBOX_SYMLINK_DIR={{ toolbox_symlink_dir_path }}
+
+AUTOSTART_DIR_PATH={{ autostart_dir_path }}
+
+echo -e "\e[94mDownloading $ARCHIVE_URL TO $TOOLBOX_SAVE_PATH...\e[39m"
+wget -q --show-progress -cO "$TOOLBOX_SAVE_PATH" "$ARCHIVE_URL"
+chmod 755 $TOOLBOX_SAVE_PATH
+
+echo -e "\e[94mExtracting to $TOOLBOX_INSTALL_DIR...\e[39m"
+mkdir -p $TOOLBOX_INSTALL_DIR
+tar -xzf "$TOOLBOX_SAVE_PATH" -C "$TOOLBOX_INSTALL_DIR" --strip-components=1
+chmod +x "$TOOLBOX_INSTALL_DIR/bin/jetbrains-toolbox"
+
+echo -e "\e[94mSymlinking to $TOOLBOX_SYMLINK_DIR/jetbrains-toolbox...\e[39m"
+mkdir -p $TOOLBOX_SYMLINK_DIR
+rm "$TOOLBOX_SYMLINK_DIR/jetbrains-toolbox" 2>/dev/null || true
+ln -s "$TOOLBOX_EXECUTABLE_RELATIVE_PATH" "$TOOLBOX_SYMLINK_DIR/jetbrains-toolbox"
+
+# register to gnome autostart
+mkdir -p $AUTOSTART_DIR_PATH
+cp "$TOOLBOX_INSTALL_DIR/bin/jetbrains-toolbox.desktop" "$AUTOSTART_DIR_PATH"
+
+# remove tarball
+rm $TOOLBOX_SAVE_PATH

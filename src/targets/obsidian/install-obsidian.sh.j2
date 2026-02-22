@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -xe
+
+OBSIDIAN_DOWNLOAD_URL=$(curl --silent "https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest" | jq -r '.assets[] | select(.browser_download_url|test("Obsidian-[0-9]+.[0-9]+.[0-9]+.AppImage$")) | .browser_download_url')
+OBSIDIAN_INSTALL_DIR_PATH={{ obsidian_install_dir_path }}
+OBSIDIAN_INSTALL_PATH={{ obsidian_install_path }}
+OBSIDIAN_ENTRY_PATH={{ obsidian_entry_path }}
+
+mkdir -p $OBSIDIAN_INSTALL_DIR_PATH
+wget $OBSIDIAN_DOWNLOAD_URL -O $OBSIDIAN_INSTALL_PATH
+chmod 755 $OBSIDIAN_INSTALL_PATH
+
+# Add desktop entry
+cat > $OBSIDIAN_ENTRY_PATH << EOL
+{{ obsidian_entry_content }}
+EOL
+
+chmod 755 $OBSIDIAN_ENTRY_PATH

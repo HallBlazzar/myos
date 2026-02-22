@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -xe
+
+NEXTCLOUD_DOWNLOAD_URL=$(curl --silent "https://api.github.com/repos/nextcloud-releases/desktop/releases/latest" | jq -r '.assets[] | select(.browser_download_url|test("x86_64.AppImage$")) | .browser_download_url')
+NEXTCLOUD_INSTALL_DIR_PATH={{ nextcloud_install_dir_path }}
+NEXTCLOUD_INSTALL_PATH={{ nextcloud_install_path }}
+NEXTCLOUD_ENTRY_PATH={{ nextcloud_entry_path }}
+
+mkdir -p $NEXTCLOUD_INSTALL_DIR_PATH
+wget $NEXTCLOUD_DOWNLOAD_URL -O $NEXTCLOUD_INSTALL_PATH
+chmod 755 $NEXTCLOUD_INSTALL_PATH
+
+# Add desktop entry
+cat > $NEXTCLOUD_ENTRY_PATH << EOL
+{{ nextcloud_entry_content }}
+EOL
+
+chmod 755 $NEXTCLOUD_ENTRY_PATH

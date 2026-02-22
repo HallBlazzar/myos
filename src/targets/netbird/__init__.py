@@ -1,0 +1,1 @@
+from .netbird import targets
