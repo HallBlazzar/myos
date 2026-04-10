@@ -13,6 +13,7 @@ core_tools_packages = UpstreamPackages(
         "yq",
         "task-ssh-server",
         "vim",
+        "dnsutils"
     ],
     package_set_code="core-tools",
 )
