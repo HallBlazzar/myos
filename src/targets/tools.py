@@ -16,6 +16,11 @@ core_tools_packages = UpstreamPackages(
         "dnsutils",
         # trixie doesn't have NTP synced by default
         "ntpsec",
+        # system information
+        "net-tools",
+        "sysstat",
+        "smem",
+        "htop",
     ],
     package_set_code="core-tools",
 )
