@@ -13,7 +13,6 @@ core_tools_packages = UpstreamPackages(
         "yq",
         "task-ssh-server",
         "vim",
-        "dnsutils",
         # trixie doesn't have NTP synced by default
         "ntpsec",
         # system information
@@ -21,6 +20,7 @@ core_tools_packages = UpstreamPackages(
         "sysstat",
         "smem",
         "htop",
+        "dnsutils",
     ],
     package_set_code="core-tools",
 )

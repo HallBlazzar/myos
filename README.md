@@ -46,6 +46,12 @@ It's not only a demo project of the `lbhelper` but a system I use in my daily ba
 31. [QEMU](https://www.qemu.org/) and [virt-manager](https://virt-manager.org/).
 32. [distrobox](https://distrobox.it/).
 33. [Android Studio related dependencies](https://developer.android.com/studio/install#64bit-libs).
+34. [NTPSec](https://wiki.debian.org/NTP) - Debian doesn't use NTP by default.
+35. [sysstat](https://sysstat.github.io/)
+36. [smem](https://www.selenic.com/smem/)
+37. [nettools](https://net-tools.sourceforge.io/) - Mainly for netstat.
+38. [dnsutils](https://packages.debian.org/sid/bind9-dnsutils) - Mainly for dig and nslookup.
+39. [HTOP](https://htop.dev/)
 
 ## How To Build
 
