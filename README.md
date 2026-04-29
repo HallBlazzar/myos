@@ -52,6 +52,7 @@ It's not only a demo project of the `lbhelper` but a system I use in my daily ba
 37. [nettools](https://net-tools.sourceforge.io/) - Mainly for netstat.
 38. [dnsutils](https://packages.debian.org/sid/bind9-dnsutils) - Mainly for dig and nslookup.
 39. [HTOP](https://htop.dev/)
+40. [strace](https://strace.io/)
 
 ## How To Build
 

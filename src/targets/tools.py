@@ -21,6 +21,7 @@ core_tools_packages = UpstreamPackages(
         "smem",
         "htop",
         "dnsutils",
+        "strace",
     ],
     package_set_code="core-tools",
 )
