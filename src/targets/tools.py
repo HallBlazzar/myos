@@ -22,6 +22,9 @@ core_tools_packages = UpstreamPackages(
         "htop",
         "dnsutils",
         "strace",
+        "gdb",
+        "iftop",
+        "nethogs"
     ],
     package_set_code="core-tools",
 )
